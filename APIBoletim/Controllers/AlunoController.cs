@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using APIBoletim.Domains;
+using APIBoletim.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,18 +14,20 @@ namespace APIBoletim.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
+
+        AlunoRepository repo = new AlunoRepository();
         // GET: api/<AlunoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Aluno> Get()
         {
-            return new string[] { "value1", "value2" };
+            return repo.ListarTodos();
         }
 
         // GET api/<AlunoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Aluno Get(int id)
         {
-            return "value";
+            return repo.BuscarPorID(id);
         }
 
         // POST api/<AlunoController>
